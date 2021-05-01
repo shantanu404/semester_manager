@@ -1,4 +1,6 @@
 from django.utils import timezone
+from django.template.defaultfilters import truncatechars
+from django.utils.html import strip_tags
 from django.db import models
 from tinymce.models import HTMLField
 
@@ -81,6 +83,11 @@ WEEKDAYS = (
 class DefaultDescription(models.Model):
     event_name = models.CharField(max_length=256, unique=True, blank=False)
     description = HTMLField(blank=False)
+
+    @property
+    def short_description(self):
+        desc = strip_tags(self.description)
+        return truncatechars(desc, 32)
 
     def __str__(self):
         return f'{self.event_name}'

@@ -10,7 +10,7 @@ import datetime
 
 @admin.register(DefaultDescription)
 class DefaultDescriptionsAdmin(admin.ModelAdmin):
-    list_display = ('event_name', 'description')
+    list_display = ('event_name', 'short_description')
     search_fields = ('event_name',)
 
 
@@ -63,10 +63,34 @@ def generate_events(request):
     return HttpResponseRedirect('.')
 
 
+class EventStatusFilter(admin.SimpleListFilter):
+    title = 'Status'
+    parameter_name = 'status'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('done', 'Done'),
+            ('scheduled', 'Scheduled'),
+            ('ongoing', 'Ongoing'),
+        )
+
+    def queryset(self, request, queryset):
+        now = timezone.localtime()
+
+        if self.value() == 'done':
+            return queryset.filter(end_time__lt=now)
+        elif self.value() == 'scheduled':
+            return queryset.filter(begin_time__gt=now)
+        elif self.value() == 'ongoing':
+            return queryset.filter(begin_time__lt=now, end_time__gt=now)
+        else:
+            return queryset
+
+
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'begin_time', 'end_time')
-    list_filter = ('begin_time',)
+    list_display = ('name', 'begin_time', 'end_time', 'status')
+    list_filter = ('begin_time', EventStatusFilter)
     search_fields = ('name',)
     list_per_page = 20
     ordering = ['begin_time']
