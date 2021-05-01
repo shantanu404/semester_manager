@@ -1,0 +1,36 @@
+{% extends 'events/base.html' %}
+{% block content %}
+    {% load tz %}
+
+    <div id="events">
+    {% if events %}
+        {% for event in events %}
+            <div class="event">
+                <div class="header">
+                    <p>
+                        {{ event.name }}
+                        <small class="time">
+                            {{ event.begin_time | localtime | time:"G:i"}} -
+                            {{ event.end_time | localtime | time:"G:i"}}
+                        </small>
+                    </p>
+                    <span class="material-icons">
+                        {% if event.status == 'done' %}
+                            done
+                        {% elif event.status == 'scheduled' %}
+                            upcoming
+                        {% else %}
+                            autorenew
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="description">
+                    {{ event.description | safe }}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Hooray! No classes today. Enjoy your day!</p>
+    {% endif %}
+    </div>
+{% endblock %}

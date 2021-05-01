@@ -1,0 +1,22 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+    {% load tz %}
+
+
+    <div id="routine">
+    {% for day, classes in routine.items %}
+        <div class="class-row {% if day == weekday %} today {% endif %}">
+            <div class="dayname">{{ day }}</div>
+            {% for class in classes %}
+                <div class="lecture {% if day == weekday and not class.past_due %} pending {% endif %}">
+                    {{ class.name }}
+                    <small>
+                        {{ class.begin_time | time:"G:i" }} - {{ class.end_time | time:"G:i" }}
+                    </small>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
