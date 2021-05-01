@@ -12,15 +12,21 @@
 
     {% load static %}
     <link rel="stylesheet" href="{% static 'events/style.css' %}">
+    <link rel="stylesheet" href="{% static 'events/menu.css' %}">
 
 </head>
 <body>
     <div class="navbar">
-        <div>Semester Manager</div>
-        <a href="/events">Home</a>
-        <a href="/routine">Routine</a>
-        <a href="/admin">Admin</a>
+        <a href="/">Semester Manager</a>
+        <div class="menu-items">
+            <a class='item' href="/events">Home</a>
+            <a class='item' href="/routine">Routine</a>
+            <a class='item' href="/admin">Admin</a>
+        </div>
+        <span id='menubutton' class='material-icons'>menu</span>
     </div>
     {% block content %}{% endblock %}
+
+    <script src="{% static 'events/menu.js' %}"></script>
 </body>
 </html>

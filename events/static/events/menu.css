@@ -1,0 +1,42 @@
+#menubutton {
+    user-select: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 0.5em;
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .body {
+        overflow-x: hidden;
+    }
+
+    .menu-items {
+        box-shadow: 1px 1px 2px 2px gray;
+        border-left: 1px solid lightskyblue;
+        border-top: 1px solid lightskyblue;
+        position: absolute;
+        z-index: 1;
+        top: 3em;
+        transform-origin: 100% 0%;
+        transform: scaleX(0);
+        width: 40%;
+        flex-direction: column;
+        background-color: #222222;
+        transition: transform 250ms;
+    }
+
+    .active {
+        transform: scaleX(1);
+    }
+
+    .item {
+        border-bottom: 1px solid lightskyblue;
+        text-align: center;
+        margin: 0px;
+    }
+
+    #menubutton {
+        display: block;
+    }
+}
