@@ -33,15 +33,17 @@ a:hover {
     display: flex;
 }
 
-.item {
+.navbar a {
     text-decoration: none;
+}
+
+.item {
     margin-top: auto;
     margin-bottom: auto;
     padding: 0.5em;
 }
 
-.navbar > a:nth-child(1) {
-    text-decoration: none;
+.navbar > div:nth-child(1) {
     width: 100%;
     padding: 0.35em;
     font-size: 1.5em;
