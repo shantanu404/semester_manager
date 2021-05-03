@@ -9,7 +9,7 @@ def index(request):
     events = Event.objects.filter(begin_time__day=now.day,
                                   begin_time__month=now.month,
                                   begin_time__year=now.year,
-                                  end_time__lte=now).order_by('begin_time')
+                                  end_time__gte=now).order_by('begin_time')
 
     return render(request, 'events/events.html', {'events': events})
 
