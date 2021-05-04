@@ -48,6 +48,9 @@ def generate_events(request):
     while today < limit:
         day_name = WEEKDAYS[today.weekday()]
         for lecture in RoutineClass.objects.filter(weekday=day_name):
+            if today.date() == now.date() and lecture.past_due:
+                # skip this shit!
+                continue
             event_name = f'{lecture.name} Lecture'
             Event(name=event_name,
                   begin_time=today + datetime.timedelta(hours=lecture.begin_time.hour,
