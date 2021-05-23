@@ -49,11 +49,21 @@ a:hover {
     font-size: 1.5em;
 }
 
-#events {
-    font-size: larger;
+.container {
+    display: block;
+}
+
+.card {
+    box-shadow: 0px 0px 2px 1px white;
     display: flex;
     margin: 1em;
     flex-direction: column;
+    padding: 0.1em;
+}
+
+#special {
+    float: right;
+    margin-top: 0em;
 }
 
 .event {
@@ -120,4 +130,26 @@ a:hover {
 .pending {
     color: black;
     background-color: lime;
+}
+
+
+@media screen and (max-width: 600px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card {
+        margin-bottom: 0em;
+    }
+
+    #special {
+        order: 1;
+        margin-top: 1em;
+    }
+
+    #upcoming {
+        order: 2;
+    }
+
 }

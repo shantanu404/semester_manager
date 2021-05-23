@@ -92,8 +92,9 @@ class EventStatusFilter(admin.SimpleListFilter):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'begin_time', 'end_time', 'status')
-    list_filter = ('begin_time', EventStatusFilter)
+    list_display = ('name', 'begin_time', 'end_time', 'special', 'status')
+    list_editable = ('special',)
+    list_filter = ('begin_time', 'special', EventStatusFilter)
     search_fields = ('name',)
     list_per_page = 20
     ordering = ['begin_time']

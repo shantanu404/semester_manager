@@ -3,35 +3,97 @@
 {% block content %}
     {% load tz %}
 
-    <div id="events">
-    {% if events %}
-        {% for event in events %}
-            <div class="event">
-                <div class="header">
-                    <p>
-                        {{ event.name }}
-                        <small class="time">
-                            {{ event.begin_time | localtime | time:"G:i"}} -
-                            {{ event.end_time | localtime | time:"G:i"}}
-                        </small>
-                    </p>
-                    <span class="material-icons">
-                        {% if event.status == 'done' %}
-                            done
-                        {% elif event.status == 'scheduled' %}
-                            upcoming
-                        {% else %}
-                            autorenew
-                        {% endif %}
-                    </span>
+    <div class="container">
+        <div id="special" class="card">
+        <div class="header">Special Events</div>
+        {% if special_events %}
+            {% for event in special_events %}
+                <div class="event">
+                    <div class="header">
+                        <p>
+                            {{ event.name }} <br>
+                            <small class="time">
+                                {{ event.begin_time| localtime | date }} <br>
+                                {{ event.begin_time | localtime | time:"G:i"}} -
+                                {{ event.end_time | localtime | time:"G:i"}}
+                            </small>
+                        </p>
+                    </div>
+                    <div class="description">
+                        {{ event.description | safe }}
+                    </div>
                 </div>
-                <div class="description">
-                    {{ event.description | safe }}
+            {% endfor %}
+        {% else %}
+            <div class="event">No special events upcoming, maybe go on a trip or something?</div>
+        {% endif %}
+        </div>
+
+        <div id="events" class="card">
+            <div class="header">Today's Events</div>
+        {% if events %}
+            {% for event in events %}
+                <div class="event">
+                    <div class="header">
+                        <p>
+                            {{ event.name }}
+                            <small class="time">
+                                {{ event.begin_time | localtime | time:"G:i"}} -
+                                {{ event.end_time | localtime | time:"G:i"}}
+                            </small>
+                        </p>
+                        <span class="material-icons">
+                            {% if event.status == 'done' %}
+                                done
+                            {% elif event.status == 'scheduled' %}
+                                upcoming
+                            {% else %}
+                                autorenew
+                            {% endif %}
+                        </span>
+                    </div>
+                    <div class="description">
+                        {{ event.description | safe }}
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>Hooray! No more classes today. Good job keeping up!</p>
-    {% endif %}
+            {% endfor %}
+        {% else %}
+            <div class="event">Hooray! No more classes today. Good job keeping up!</div>
+        {% endif %}
+        </div>
+
+        <div id="upcoming" class="card">
+        <div class="header">Upcoming Events</div>
+        {% if upcoming_events %}
+            {% for event in upcoming_events %}
+                <div class="event">
+                    <div class="header">
+                        <p>
+                            {{ event.name }} <br>
+                            <small class="time">
+                                {{ event.begin_time| localtime | date }},
+                                {{ event.begin_time | localtime | time:"G:i"}} -
+                                {{ event.end_time | localtime | time:"G:i"}}
+                            </small>
+                        </p>
+                        <span class="material-icons">
+                            {% if event.status == 'done' %}
+                                done
+                            {% elif event.status == 'scheduled' %}
+                                upcoming
+                            {% else %}
+                                autorenew
+                            {% endif %}
+                        </span>
+                    </div>
+                    <div class="description">
+                        {{ event.description | safe }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="event">Looks like this is the end...</div>
+        {% endif %}
+        </div>
     </div>
 {% endblock %}

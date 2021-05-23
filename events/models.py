@@ -7,6 +7,7 @@ from tinymce.models import HTMLField
 
 class Event(models.Model):
     name = models.CharField(max_length=256, blank=False)
+    special = models.BooleanField(blank=False, default=False)
     begin_time = models.DateTimeField('Start', blank=False)
     end_time = models.DateTimeField('End', blank=False)
     description = HTMLField(blank=False)

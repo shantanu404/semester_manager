@@ -7,10 +7,6 @@
 }
 
 @media screen and (max-width: 600px) {
-    .body {
-        overflow-x: hidden;
-    }
-
     .menu-items {
         box-shadow: 1px 1px 2px 2px gray;
         border-left: 1px solid lightskyblue;
